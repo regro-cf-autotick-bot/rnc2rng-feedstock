@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/rnc2rng-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rnc2rng-{{ version }}.tar.gz
   sha256: 5a01d157857b5f010a94167e7092cc49efe2531d58e013f12c4e60b8c4df78f1
 
 build:
@@ -14,14 +14,14 @@ build:
     - rnc2rng = rnc2rng.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - rply
 
 test:
@@ -35,6 +35,7 @@ test:
     - python test.py
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/djc/rnc2rng
